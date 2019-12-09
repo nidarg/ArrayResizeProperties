@@ -4,35 +4,39 @@ namespace ArrayCRUD
 {
     public class IntArray
     {
+        private readonly int initialLength = 4;
         private int[] arr;
+        private int countFromZero;
 
-        public IntArray() => arr = new int[InitialLength];
-
-#pragma warning disable RCS1170 // Use read-only auto-implemented property.
-        public int InitialLength { get; private set; } = 4;
+        public IntArray() => arr = new int[initialLength];
 
         public int Count { get; private set; }
 
-        public int CountFromZero { get; private set; }
+        public int InitialLength1 => initialLength;
 
         public int this[int index]
         {
             get => arr[index];
             set => arr[index] = value;
         }
-#pragma warning restore RCS1170 // Use read-only auto-implemented property.
+
+        public void ResizeArray()
+        {
+            const int doubleSize = 2;
+            if (countFromZero != arr.Length)
+            {
+                return;
+            }
+
+            Array.Resize(ref arr, countFromZero * doubleSize);
+        }
 
         public void Add(int element)
         {
-            const int doubleSize = 2;
-            if (CountFromZero == arr.Length)
-            {
-                Array.Resize(ref arr, CountFromZero * doubleSize);
-            }
-
+            ResizeArray();
             Count = arr.Length;
-            arr[CountFromZero] = element;
-            CountFromZero++;
+            arr[countFromZero] = element;
+            countFromZero++;
         }
 
         public bool Contains(int element)
@@ -63,9 +67,10 @@ namespace ArrayCRUD
 
         public void Insert(int index, int element)
         {
-            Array.Resize(ref arr, arr.Length + 1);
+            ResizeArray();
             ShiftRight(index);
             arr[index] = element;
+            countFromZero++;
             Count = arr.Length;
         }
 
@@ -97,9 +102,9 @@ namespace ArrayCRUD
 
         private void ShiftRight(int index)
         {
-            for (int i = index; i > 0; i--)
+            for (int i = index; i < arr.Length - 1; i++)
             {
-                arr[i] = arr[i - 1];
+                arr[i + 1] = arr[i];
             }
         }
     }
