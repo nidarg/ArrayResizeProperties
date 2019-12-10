@@ -6,13 +6,10 @@ namespace ArrayCRUD
     {
         private readonly int initialLength = 4;
         private int[] arr;
-        private int countFromZero;
 
         public IntArray() => arr = new int[initialLength];
 
         public int Count { get; private set; }
-
-        public int InitialLength1 => initialLength;
 
         public int this[int index]
         {
@@ -23,33 +20,19 @@ namespace ArrayCRUD
         public void ResizeArray()
         {
             const int doubleSize = 2;
-            if (countFromZero != arr.Length)
+            if (Count != arr.Length)
             {
                 return;
             }
 
-            Array.Resize(ref arr, countFromZero * doubleSize);
+            Array.Resize(ref arr, Count * doubleSize);
         }
 
         public void Add(int element)
         {
             ResizeArray();
-            Count = arr.Length;
-            arr[countFromZero] = element;
-            countFromZero++;
-        }
-
-        public bool Contains(int element)
-        {
-            foreach (int elem in arr)
-            {
-                if (elem == element)
-                {
-                    return true;
-                }
-            }
-
-            return false;
+            arr[Count] = element;
+            Count++;
         }
 
         public int IndexOf(int element)
@@ -65,13 +48,17 @@ namespace ArrayCRUD
             return -1;
         }
 
+        public bool Contains(int element)
+        {
+            return this.IndexOf(element) != -1;
+        }
+
         public void Insert(int index, int element)
         {
             ResizeArray();
             ShiftRight(index);
             arr[index] = element;
-            countFromZero++;
-            Count = arr.Length;
+            Count++;
         }
 
         public void Clear()
@@ -89,7 +76,12 @@ namespace ArrayCRUD
         {
             ShiftLeft(index);
             Array.Resize(ref arr, arr.Length - 1);
-            Count = arr.Length;
+            Count--;
+        }
+
+        public int LengthOfResizedArray()
+        {
+            return arr.Length;
         }
 
         private void ShiftLeft(int index)

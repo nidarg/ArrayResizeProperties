@@ -30,7 +30,8 @@ namespace ArrayCRUDTest
             sut.Add(4);
             sut.Insert(1, 9);
             Assert.Equal(1, sut.IndexOf(9));
-            Assert.Equal(8, sut.Count);
+            Assert.Equal(5, sut.Count);
+            Assert.Equal(8, sut.LengthOfResizedArray());
         }
 
         [Fact]
@@ -43,7 +44,7 @@ namespace ArrayCRUDTest
             sut.Add(4);
             sut.Add(5);
             sut.Insert(1, 4);
-            Assert.Equal(8, sut.Count);
+            Assert.Equal(6, sut.Count);
         }
     }
 }

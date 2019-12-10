@@ -17,7 +17,8 @@ namespace ArrayCRUDTest
             sut.Add(3);
             sut.Add(4);
             sut.Add(5);
-            Assert.Equal(8, sut.Count);
+            Assert.Equal(5, sut.Count);
+            Assert.Equal(8, sut.LengthOfResizedArray());
         }
     }
 }

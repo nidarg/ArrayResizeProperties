@@ -18,7 +18,7 @@ namespace ArrayCRUDTest
             sut.Add(4);
             sut.Add(5);
             sut.Remove(2);
-            Assert.Equal(7, sut.Count);
+            Assert.Equal(4, sut.Count);
         }
         [Fact]
         public void VerifyElementsAfterRemove()

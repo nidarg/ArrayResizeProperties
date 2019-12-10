@@ -18,13 +18,13 @@ namespace ArrayCRUDTest
             sut.Add(2);
             sut.Add(3);
             Assert.Equal(2, sut[1]);
-            Assert.Equal(4, sut.Count);
+            Assert.Equal(3, sut.Count);
         }
 
         [Fact]
         public void AddValueAndResize()
         {
-            
+
             var sut = new IntArray();
             sut.Add(0);
             sut.Add(2);
@@ -38,9 +38,10 @@ namespace ArrayCRUDTest
             sut.Add(10);
 
             Assert.Equal(3, sut[2]);
-            Assert.Equal(16, sut.Count);
+            Assert.Equal(10, sut.Count);
+            Assert.Equal(16, sut.LengthOfResizedArray());
         }
 
-      
+
     }
 }
